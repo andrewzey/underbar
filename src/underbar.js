@@ -102,12 +102,18 @@ var _ = {};
     return result;
   };
 
-  console.log(_.filter([1,2,3,4,5,6], function(num) {return num % 2 === 0;}));
-
   // Return all elements of an array that don't pass a truth test.
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
+    var result = [];
+    _.each(collection, function(item, index) {
+      if (test(item) === false) {
+        result.push(item);
+      }
+    });
+
+    return result;
   };
 
   // Produce a duplicate-free version of the array.
