@@ -150,7 +150,7 @@ var _ = {};
    * as an example of this.
    */
 
-  // Takes an array of objects and returns and array of the values of
+  // Takes an array of objects and returns an array of the values of
   // a certain property in it. E.g. take an array of people and return
   // an array of just their ages
   _.pluck = function(collection, key) {
@@ -165,7 +165,18 @@ var _ = {};
   // Calls the method named by methodName on each value in the list.
   // Note: you will nead to learn a bit about .apply to complete this.
   _.invoke = function(collection, functionOrKey, args) {
+    var args = Array.prototype.slice.call(arguments, 2);
+    
+    return _.map(collection, function(item){
+      if (typeof functionOrKey === "function") {
+        return functionOrKey.apply(item, args);
+      } else {
+        return item[functionOrKey].apply(item, args); 
+      }
+      
+    });
   };
+
 
   // Reduces an array or object to a single value by repetitively calling
   // iterator(previousValue, item) for each item. previousValue should be
