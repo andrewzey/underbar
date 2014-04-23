@@ -386,7 +386,7 @@ describe('defaults', function() {
     expect(defaulted).to.equal(to);
   });
 
-  it('should copy a property if that key is already set on the target', function() {
+  it('should copy a property if that key is not already set on the target', function() {
     var to = {};
     var from = {a:1};
     var defaulted = _.defaults(to, from);
