@@ -390,6 +390,15 @@ var _ = {};
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
+    var result = array.slice(0);
+
+    for (var i = 0; i < result.length; i++) {
+      //push (randomly selected and removed) element from array
+      var arrSelector = Math.floor(Math.random() * (result.length - i) );
+      result.push(result.splice(arrSelector,1)[0]);
+    }
+
+    return result;
   };
 
 
