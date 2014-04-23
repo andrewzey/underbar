@@ -339,7 +339,7 @@ var _ = {};
     return function() {
       if (!alreadyCalled) {
         // TIP: .apply(this, arguments) is the standard way to pass on all of the
-        // infromation from one function call to another.
+        // information from one function call to another.
         result = func.apply(this, arguments);
         alreadyCalled = true;
       }
@@ -355,6 +355,18 @@ var _ = {};
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    //create object with keys (stored argument of previous function calls) and values (stored results)
+    var memo = {};
+    
+    return function() {
+      var key = arguments[0]; //stores the single argument passed
+
+      if (!memo[key]) {
+        //stores the computed result as a new key-value pair in the memo object
+        memo[key] = func.apply(this, arguments);
+      }
+      return memo[key];
+    };    
   };
 
   // Delays a function for the given number of milliseconds, and then calls
