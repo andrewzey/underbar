@@ -297,12 +297,23 @@ var _ = {};
       });
     });
     
-      return to;
+    return to;
   };
 
   // Like extend, but doesn't ever overwrite a key that already
-  // exists in obj
-  _.defaults = function(obj) {
+  // exists in "to"
+  _.defaults = function(to, from) {
+    var arrayOfObjects = Array.prototype.slice.call(arguments, 1);
+
+    _.each(arrayOfObjects, function(obj) {
+      _.each(obj, function(value, key) {
+        if (typeof to[key] === "undefined") {
+          to[key] = value
+        };
+      });
+    });
+
+    return to;
   };
 
 
