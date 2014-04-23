@@ -231,6 +231,38 @@ var _ = {};
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+
+    if (!iterator) {
+      iterator = _.identity;
+    }
+    
+    // //solution using _.each
+    // var result = false;
+    // _.each(collection, function(item){
+    //   if (iterator(item)) result = true;
+    // });
+    // return result;
+
+    // //solution using _.reduce
+    // return _.reduce(collection, function(isTrue, item) {
+    //   if (iterator(item)) return true;
+    //   return isTrue;
+    // }, false);
+
+    //solution using _.every
+    //if every item fails the truth test, then _.some should return false, otherwise true
+
+    // if (_.every(collection, function(item) { return !(iterator(item)); } )) {
+    //   return false
+    // } else {
+    //   return true;
+    // }
+
+    //refactored
+    return !_.every(collection, function(item) { 
+      return !(iterator(item)); 
+    });    
+
   };
 
 
