@@ -106,14 +106,21 @@ var _ = {};
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
-    var result = [];
-    _.each(collection, function(item) {
-      if (test(item) === false) {
-        result.push(item);
-      }
-    });
+    
+    // //solution using each
+    // var result = [];
+    // _.each(collection, function(item) {
+    //   if (test(item) === false) {
+    //     result.push(item);
+    //   }
+    // });
 
-    return result;
+    // return result;
+
+    //solution using filter
+    return _.filter(collection, function(item) {
+      return !test(item);
+    });
   };
 
   // Produce a duplicate-free version of the array.
@@ -260,7 +267,7 @@ var _ = {};
 
     //refactored
     return !_.every(collection, function(item) { 
-      return !(iterator(item)); 
+      return !iterator(item); //every() returns true if every single item fails the truth test
     });    
 
   };
