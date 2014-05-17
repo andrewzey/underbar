@@ -199,11 +199,18 @@ var _ = {};
   //     return total + number;
   //   }, 0); // should be 6
   _.reduce = function(collection, iterator, accumulator) {
+    if (typeof accumulator === "undefined") {
+      if (Array.isArray(collection)) {
+        accumulator = collection[0];
+      }
+    }
     _.each(collection, function(item, index) {
       accumulator = iterator(accumulator, item);
     });
     return accumulator;  
   };
+
+  console.log(_.reduce({num1: 1, num2: 2, num3: 3}, function(total, number){return total + number}));
 
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function(collection, target) {
