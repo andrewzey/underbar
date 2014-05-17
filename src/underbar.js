@@ -64,7 +64,7 @@ var _ = {};
     }
 
     //if object (only strings and arrays have prototypal method "length")
-    if (collection.length === undefined) {
+    if (typeof collection === "object" && collection.length === undefined) {
       //iterate through each key of object
       for (var key in collection) {
         //pass that key's value to iterator function
