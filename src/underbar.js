@@ -416,7 +416,7 @@ var _ = {};
     for (var i = 0; i < result.length; i++) {
       //push (randomly selected and removed) element from array
       var arrSelector = Math.floor(Math.random() * (result.length - i) );
-      result.push(result.splice(arrSelector,1)[0]);
+      result.push(result.splice(arrSelector,1)[0]); //[0] is because return.splice returns an array with a single item
     }
 
     return result;
