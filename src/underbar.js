@@ -210,8 +210,6 @@ var _ = {};
     return accumulator;  
   };
 
-  console.log(_.reduce({num1: 1, num2: 2, num3: 3}, function(total, number){return total + number}));
-
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function(collection, target) {
     // TIP: Many iteration problems can be most easily expressed in
@@ -220,8 +218,8 @@ var _ = {};
       if (wasFound) {
         return true;
       }
-      return item === target;
-    }, false);
+      return item === target; // this becomes the value of wasFound on next iteratorCall
+    }, false); //if wasFound (the accuulator) is never set to true (as a result of matching the target), then _.contains returns false;
   };
 
 
