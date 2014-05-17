@@ -226,6 +226,8 @@ var _ = {};
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
+
+    //return true unless an item is false or returns false when passed through the iterator function (truth test)
     return _.reduce(collection, function(isTrue, item) {
       //if there is no iterator function, and the item evaluates to "false"
       if (!iterator) {
@@ -364,20 +366,25 @@ var _ = {};
   // _.memoize should return a function that when called, will check if it has
   // already computed the result for the given argument and return that value
   // instead if possible.
+  //
+  //USAGE
+  //var fastFunc = _.memoize(func);
+  //fastFunc(arg)
   _.memoize = function(func) {
     //create object with keys (stored argument of previous function calls) and values (stored results)
-    var memo = {};
+    var memo = {}; //available in closure scope
     
-    return function() {
-      var key = arguments[0]; //stores the single argument passed
+    return function(arg) {
+      var key = arg; //stores the single argument passed. this is passed in by calling the 
 
-      if (!memo[key]) {
-        //stores the computed result as a new key-value pair in the memo object
-        memo[key] = func.apply(this, arguments);
+      if (!memo[key]) { //if the key doesn't exist (meaning it wasn't ever computed and its value stored)
+        memo[key] = func.call(this, arg); //store the computed result as a new key-value pair in the memo object
       }
       return memo[key];
     };    
   };
+
+  
 
   // Delays a function for the given number of milliseconds, and then calls
   // it with the arguments supplied.
